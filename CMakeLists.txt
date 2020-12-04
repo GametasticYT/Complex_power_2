@@ -3,13 +3,13 @@ project(MandelBrot_Julia_Raylib)
 
 SET(CMAKE_CXX_STANDARD 17)
 
-# raylib
 find_package(raylib 3.0.0 QUIET)
 if (NOT raylib_FOUND)
     include(FetchContent)
     FetchContent_Declare(
             raylib
             GIT_REPOSITORY https://github.com/raysan5/raylib.git
+            GIT_TAG bd512764ff7c82fa6e1395c51accb3ba18162827
     )
     FetchContent_GetProperties(raylib)
     if (NOT raylib_POPULATED)
@@ -22,13 +22,13 @@ if (NOT raylib_FOUND)
     endif()
 endif()
 
-
 find_package(raylib-cpp 3.0.1 QUIET)
 if (NOT raylib-cpp_FOUND)
     include(FetchContent)
     FetchContent_Declare(
             raylib-cpp
             GIT_REPOSITORY https://github.com/RobLoach/raylib-cpp.git
+            GIT_TAG ebb379029bd8f73dc42791f5d8fc9c9e607ffd1a
     )
     FetchContent_GetProperties(raylib-cpp)
     if (NOT raylib-cpp_POPULATED)
@@ -45,5 +45,4 @@ set(PROJECT_SOURCES src/main.cpp)
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 set(raylib_VERBOSE 1)
 target_link_libraries(${PROJECT_NAME} PUBLIC raylib raylib-cpp)
-
 

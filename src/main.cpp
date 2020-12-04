@@ -2,13 +2,13 @@
 #include <cstring>
 #include <complex>
 
-#define TOTEMENSCHEN(num) std::complex<double> iternum(0, 0);
 
 
 int main() {
-    int screenWidth = 1050;
-    int screenHeight = 1050;
+    int screenWidth = 1000;
+    int screenHeight = 1000;
     int i;
+    int n = 256;
 
 
 
@@ -23,30 +23,9 @@ int main() {
     double modifier[2] = {0, 0};
 
     std::complex<double> C(0, 0);
+    std::complex<double> iter[n];
+    std::complex<double> tempComplex(0, 0);
 
-    std::complex<double> iter1(0, 0);
-    std::complex<double> iter2(0, 0);
-    std::complex<double> iter3(0, 0);
-    std::complex<double> iter4(0, 0);
-    std::complex<double> iter5(0, 0);
-    std::complex<double> iter6(0, 0);
-    std::complex<double> iter7(0, 0);
-    std::complex<double> iter8(0, 0);
-    std::complex<double> iter9(0, 0);
-    std::complex<double> iter10(0, 0);
-    std::complex<double> iter11(0, 0);
-    std::complex<double> iter12(0, 0);
-    std::complex<double> iter13(0, 0);
-    std::complex<double> iter14(0, 0);
-    std::complex<double> iter15(0, 0);
-    std::complex<double> iter16(0, 0);
-    std::complex<double> iter17(0, 0);
-    std::complex<double> iter18(0, 0);
-
-//    for (int j = 0; j < 18; j++)
-//    {
-//        TOTEMENSCHEN(j+1);
-//    }
 
 
 
@@ -78,8 +57,8 @@ int main() {
         DrawCircle(GetMouseX() - GetScreenWidth() / 2, GetMouseY() - GetScreenHeight() / 2, 5, BLACK);
 
         // Pow Circle
-        MouseX = (GetMouseX() - (GetScreenWidth() / 2.0)) / 100.0;
-        MouseY = (GetMouseY() - (GetScreenHeight() / 2.0)) / 100.0;
+        MouseX = (GetMouseX() - (GetScreenWidth() / 2.0)) / 500.0;
+        MouseY = (GetMouseY() - (GetScreenHeight() / 2.0)) / 500.0;
 
 
         C = {MouseX, MouseY};
@@ -87,117 +66,45 @@ int main() {
         // Change Iter1 Points with Buttons
         if (IsKeyDown(KEY_LEFT))
         {
-            modifier[0] -= 0.01;
+            modifier[0] -= 0.005;
         } else if (IsKeyDown(KEY_RIGHT)) {
-            modifier[0] += 0.01;
+            modifier[0] += 0.005;
         } else if (IsKeyDown(KEY_UP)) {
-            modifier[1] -= 0.01;
+            modifier[1] -= 0.005;
         } else if (IsKeyDown(KEY_DOWN)) {
-            modifier[1] += 0.01;
+            modifier[1] += 0.005;
         }
 
         // Get the Complex points
-        iter1 = {0 + modifier[0], 0 + modifier[1]};
-        iter1 = std::pow(iter1, 2) + C;
 
-        iter2 = iter1;
-        iter2 = std::pow(iter2, 2) + C;
+        iter[0] = {modifier[0], modifier[1]};
+        iter[0] = std::pow(iter[0], 2) + C;
+        for(int j = 0; j < n; j++)
+        {
+            iter[j+1] = iter[j];
+            iter[j+1] = std::pow(iter[j+1], 2) + C;
+        }
 
-        iter3 = iter2;
-        iter3 = std::pow(iter3, 2) + C;
-
-        iter4 = iter3;
-        iter4 = std::pow(iter4, 2) + C;
-
-        iter5 = iter4;
-        iter5 = std::pow(iter5, 2) + C;
-
-        iter6 = iter5;
-        iter6 = std::pow(iter6, 2) + C;
-
-        iter7 = iter6;
-        iter7 = std::pow(iter7, 2) + C;
-
-        iter8 = iter7;
-        iter8 = std::pow(iter8, 2) + C;
-
-        iter9 = iter8;
-        iter9 = std::pow(iter9, 2) + C;
-
-        iter10 = iter9;
-        iter10 = std::pow(iter10, 2) + C;
-
-        iter11 = iter10;
-        iter11 = std::pow(iter11, 2) + C;
-
-        iter12 = iter11;
-        iter12 = std::pow(iter12, 2) + C;
-
-        iter13 = iter12;
-        iter13 = std::pow(iter13, 2) + C;
-
-        iter14 = iter13;
-        iter14 = std::pow(iter14, 2) + C;
-
-        iter15 = iter14;
-        iter15 = std::pow(iter15, 2) + C;
-
-        iter16 = iter15;
-        iter16 = std::pow(iter16, 2) + C;
-
-        iter17 = iter16;
-        iter17 = std::pow(iter17, 2) + C;
-
-        iter18 = iter17;
-        iter18 = std::pow(iter18, 2) + C;
 
 
         //Draw lines between all complex points
-        DrawLine(std::real(iter1) * 100.0, std::imag(iter1) * 100.0, std::real(iter2) * 100.0, std::imag(iter2) * 100.0, BLACK);
-        DrawLine(std::real(iter2) * 100.0, std::imag(iter2) * 100.0, std::real(iter3) * 100.0, std::imag(iter3) * 100.0, BLACK);
-        DrawLine(std::real(iter3) * 100.0, std::imag(iter3) * 100.0, std::real(iter4) * 100.0, std::imag(iter4) * 100.0, BLACK);
-        DrawLine(std::real(iter4) * 100.0, std::imag(iter4) * 100.0, std::real(iter5) * 100.0, std::imag(iter5) * 100.0, BLACK);
-        DrawLine(std::real(iter5) * 100.0, std::imag(iter5) * 100.0, std::real(iter6) * 100.0, std::imag(iter6) * 100.0, BLACK);
-        DrawLine(std::real(iter6) * 100.0, std::imag(iter6) * 100.0, std::real(iter7) * 100.0, std::imag(iter7) * 100.0, BLACK);
-        DrawLine(std::real(iter7) * 100.0, std::imag(iter7) * 100.0, std::real(iter8) * 100.0, std::imag(iter8) * 100.0, BLACK);
-        DrawLine(std::real(iter8) * 100.0, std::imag(iter8) * 100.0, std::real(iter9) * 100.0, std::imag(iter9) * 100.0, BLACK);
-        DrawLine(std::real(iter9) * 100.0, std::imag(iter9) * 100.0, std::real(iter10) * 100.0, std::imag(iter10) * 100.0, BLACK);
-        DrawLine(std::real(iter10) * 100.0, std::imag(iter10) * 100.0, std::real(iter11) * 100.0, std::imag(iter11) * 100.0, BLACK);
-        DrawLine(std::real(iter11) * 100.0, std::imag(iter11) * 100.0, std::real(iter12) * 100.0, std::imag(iter12) * 100.0, BLACK);
-        DrawLine(std::real(iter12) * 100.0, std::imag(iter12) * 100.0, std::real(iter13) * 100.0, std::imag(iter13) * 100.0, BLACK);
-        DrawLine(std::real(iter13) * 100.0, std::imag(iter13) * 100.0, std::real(iter14) * 100.0, std::imag(iter14) * 100.0, BLACK);
-        DrawLine(std::real(iter14) * 100.0, std::imag(iter14) * 100.0, std::real(iter15) * 100.0, std::imag(iter15) * 100.0, BLACK);
-        DrawLine(std::real(iter15) * 100.0, std::imag(iter15) * 100.0, std::real(iter16) * 100.0, std::imag(iter16) * 100.0, BLACK);
-        DrawLine(std::real(iter16) * 100.0, std::imag(iter16) * 100.0, std::real(iter17) * 100.0, std::imag(iter17) * 100.0, BLACK);
-        DrawLine(std::real(iter17) * 100.0, std::imag(iter17) * 100.0, std::real(iter18) * 100.0, std::imag(iter18) * 100.0, BLACK);
-
+        for(int j = 0; j < n - 1; j++)
+        {
+            DrawLine(std::real(iter[j]) * 500.0, std::imag(iter[j]) * 500.0, std::real(iter[j+1]) * 500.0, std::imag(iter[j+1]) * 500.0, BLACK);
+        }
 
 
         // Conversions from string to char bc DrawText() uses char :P
         strcpy(fpsTxt, std::to_string(GetFPS()).c_str());
 
         // Draw Modifier
-        DrawCircle(modifier[0] * 100.0, modifier[1] * 100.0, 8, RED);
+        DrawCircle(modifier[0] * 500.0, modifier[1] * 500.0, 8, RED);
 
         // Draw the points
-        DrawCircle((std::real(iter1)) * 100.0, (std::imag(iter1)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter2)) * 100.0, (std::imag(iter2)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter3)) * 100.0, (std::imag(iter3)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter4)) * 100.0, (std::imag(iter4)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter5)) * 100.0, (std::imag(iter5)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter6)) * 100.0, (std::imag(iter6)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter7)) * 100.0, (std::imag(iter7)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter8)) * 100.0, (std::imag(iter8)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter9)) * 100.0, (std::imag(iter9)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter10)) * 100.0, (std::imag(iter10)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter11)) * 100.0, (std::imag(iter11)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter12)) * 100.0, (std::imag(iter12)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter13)) * 100.0, (std::imag(iter13)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter14)) * 100.0, (std::imag(iter14)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter15)) * 100.0, (std::imag(iter15)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter16)) * 100.0, (std::imag(iter16)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter17)) * 100.0, (std::imag(iter17)) * 100.0, 5, BLUE);
-        DrawCircle((std::real(iter18)) * 100.0, (std::imag(iter18)) * 100.0, 5, BLUE);
+        for(int j = 0; j < n; j++)
+        {
+            DrawCircle(std::real(iter[j]) * 500.0, std::imag(iter[j]) * 500.0, 5, BLUE);
+        }
 
 
         // Coordinate System
@@ -207,7 +114,7 @@ int main() {
         // End Coordinate System
 
         // Outer Circle
-        DrawCircleLines(0, 0, 100, BLACK);
+        DrawCircleLines(0, 0, 500, BLACK);
 
 
         // Display 2nd Ball Coords
